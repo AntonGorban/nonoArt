@@ -1,6 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, nativeStatusBar } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+
+const variables = {
+  color: {
+    black: "#2d2d2d",
+    lightBlack: "#3d3d3d",
+    white: "#fefefe",
+  },
+};
 
 export default function App() {
   return (
@@ -14,7 +22,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: variables.color.lightBlack,
     alignItems: "center",
     justifyContent: "center",
   },
