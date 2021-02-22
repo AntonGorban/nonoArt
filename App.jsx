@@ -1,9 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import * as sett from "./src/settings.json";
+import * as level from "./src/assets/level.json";
 import { Header } from './src/Header';
+import { GameGrid } from './src/GameGrid/GameGrid';
 
 export default function App() {
   const [fontsLoaded] = Font.useFonts({
@@ -20,6 +22,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header/>
+      <View>
+        <Text>Levels</Text>
+      </View>
+      <GameGrid art={level.art} colors={level.colors}/>
+      <View>
+        <Text>Colors</Text>
+      </View>
     </View>
   );
 }
