@@ -1,13 +1,31 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import * as sett from "./src/settings.json";
 import * as level from "./src/assets/level.json";
-import { Header } from './src/Header';
-import { GameGrid } from './src/GameGrid/GameGrid';
+import { Header } from "./src/Header";
+import { GameGrid } from "./src/GameGrid/GameGrid";
+
+const arr = (height, width) =>
+  Array(height)
+    .fill(null)
+    .map(() => Array(width).fill(null));
 
 export default function App() {
+  const [data, setData] = useState(arr(10, 10));
+  const updateData = (rowId, colId, color) =>
+    setData((prev) =>
+      prev.map((row, rowIndex) =>
+        rowIndex == rowId
+          ? row.map((cell, cellIndex) =>
+              cellIndex == colId ? (cell != color ? color : null) : cell
+            )
+          : row
+      )
+    );
+
+  /* --- Fonts --- */
   const [fontsLoaded] = Font.useFonts({
     "Montserrat-Alternates-light": require("./src/assets/fonts/MontserratAlternates-Light.otf"),
     "Montserrat-Alternates-regular": require("./src/assets/fonts/MontserratAlternates-Regular.otf"),
@@ -18,16 +36,24 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+  /* --- End Fonts --- */
   return (
     <View style={styles.container}>
-      <Header/>
+      <Header />
       <View>
         <Text>Levels</Text>
       </View>
-      <GameGrid art={level.art} colors={level.colors}/>
+      <GameGrid art={data} colors={level.colors} onClick={updateData} />
       <View>
-        <Text>Colors</Text>
+        <Button
+          title="Update"
+          onPress={() =>
+            setData([
+              [null, null],
+              [null, null],
+            ])
+          }
+        />
       </View>
     </View>
   );
@@ -39,7 +65,6 @@ const styles = StyleSheet.create({
     backgroundColor: sett.colors.black,
     alignItems: "center",
     justifyContent: "space-between",
-    // paddingHorizontal: 15,
   },
   text: {
     fontSize: 35,
