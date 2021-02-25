@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import * as sett from "../settings.json";
 
 export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
@@ -7,15 +7,14 @@ export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
     onClick(rowIndex, cellIndex, Math.trunc((Math.random() * 10) % 3));
 
   return (
-    <TouchableOpacity
-      style={{
-        ...styles.pixel,
-        backgroundColor: color ? color : sett.colors.white,
-      }}
-      onPress={clickHandler}
-    >
-      {/* <Text style={{fontSize: 15}}>{cell ?? '-'}</Text> */}
-    </TouchableOpacity>
+    <TouchableNativeFeedback onPress={clickHandler}>
+      <View
+        style={{
+          ...styles.pixel,
+          backgroundColor: color ? color : sett.colors.white,
+        }}
+      />
+    </TouchableNativeFeedback>
   );
 };
 
