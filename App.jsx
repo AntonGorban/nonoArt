@@ -15,15 +15,20 @@ const arr = (height, width) =>
 export default function App() {
   const [data, setData] = useState(arr(10, 10));
   const updateData = (rowId, colId, color) =>
-    setData((prev) =>
-      prev.map((row, rowIndex) =>
-        rowIndex == rowId
-          ? row.map((cell, cellIndex) =>
-              cellIndex == colId ? (cell != color ? color : null) : cell
-            )
-          : row
-      )
-    );
+    setData((prev) => {
+      prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
+      return [...prev];
+    });
+
+  // setData((prev) =>
+  //   prev.map((row, rowIndex) =>
+  //     rowIndex == rowId
+  //       ? row.map((cell, cellIndex) =>
+  //           cellIndex == colId ? (cell != color ? color : null) : cell
+  //         )
+  //       : row
+  //   )
+  // );
 
   /* --- Fonts --- */
   const [fontsLoaded] = Font.useFonts({
@@ -45,15 +50,7 @@ export default function App() {
       </View>
       <GameGrid art={data} colors={level.colors} onClick={updateData} />
       <View>
-        <Button
-          title="Update"
-          onPress={() =>
-            setData([
-              [null, null],
-              [null, null],
-            ])
-          }
-        />
+        <Text>Colors</Text>
       </View>
     </View>
   );
