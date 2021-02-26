@@ -13,7 +13,7 @@ const arr = (height, width) =>
     .map(() => Array(width).fill(null));
 
 export default function App() {
-  const [data, setData] = useState(arr(10, 10));
+  const [data, setData] = useState(arr(level.height, level.width));
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
       prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
@@ -50,7 +50,7 @@ export default function App() {
       </View>
       <GameGrid
         art={level.art}
-        data={level.art}
+        data={data}
         colors={level.colors}
         onClick={updateData}
       />

@@ -3,8 +3,8 @@ import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import * as sett from "../settings.json";
 
 export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
-  const clickHandler = () =>
-    onClick(rowIndex, cellIndex, Math.trunc((Math.random() * 10) % 3));
+  const clickHandler = () => onClick(rowIndex, cellIndex, /* colorId: */ 0);
+  // onClick(rowIndex, cellIndex, Math.trunc((Math.random() * 10) % 3));
 
   return (
     <TouchableNativeFeedback onPress={clickHandler}>
@@ -20,8 +20,8 @@ export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
 
 const styles = StyleSheet.create({
   pixel: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     margin: 1,
     backgroundColor: sett.colors.white,
     alignItems: "center",

@@ -10,6 +10,9 @@ export const Counters = ({ mode, art, data, colors }) => {
       art[mode === "row" ? i : j][mode === "row" ? j : i] !== null
         ? counterValue[art[mode === "row" ? i : j][mode === "row" ? j : i]]++
         : undefined;
+      data[mode === "row" ? i : j][mode === "row" ? j : i] !== null
+        ? counterValue[data[mode === "row" ? i : j][mode === "row" ? j : i]]--
+        : undefined;
     }
     counterElements.push(
       <View
