@@ -48,7 +48,12 @@ export default function App() {
       <View>
         <Text>Levels</Text>
       </View>
-      <GameGrid art={data} colors={level.colors} onClick={updateData} />
+      <GameGrid
+        art={level.art}
+        data={level.art}
+        colors={level.colors}
+        onClick={updateData}
+      />
       <View>
         <Text>Colors</Text>
       </View>
