@@ -13,7 +13,7 @@ const arr = (height, width) =>
     .map(() => Array(width).fill(null));
 
 export default function App() {
-  const [data, setData] = useState(arr(level.height, level.width));
+  const [data, setData] = useState(arr(19, 15));
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
       prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
@@ -45,16 +45,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header />
-      <View>
+      <View style={{ height: 90 }}>
         <Text>Levels</Text>
       </View>
       <GameGrid
-        art={level.art}
+        art={data}
         data={data}
         colors={level.colors}
         onClick={updateData}
       />
-      <View>
+      <View style={{ height: 100 }}>
         <Text>Colors</Text>
       </View>
     </View>

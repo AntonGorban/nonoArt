@@ -2,9 +2,9 @@ import React from "react";
 import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import * as sett from "../settings.json";
 
-export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
-  const clickHandler = () => onClick(rowIndex, cellIndex, /* colorId: */ 0);
-  // onClick(rowIndex, cellIndex, Math.trunc((Math.random() * 10) % 3));
+export const Cell = ({ cell, rowIndex, cellIndex, color, onClick, size }) => {
+  const clickHandler = () =>
+    onClick(rowIndex, cellIndex, Math.trunc((Math.random() * 10) % 3));
 
   return (
     <TouchableNativeFeedback onPress={clickHandler}>
@@ -12,6 +12,8 @@ export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
         style={{
           ...styles.pixel,
           backgroundColor: color ? color : sett.colors.white,
+          width: size,
+          height: size,
         }}
       />
     </TouchableNativeFeedback>
@@ -20,8 +22,8 @@ export const Cell = ({ cell, rowIndex, cellIndex, color, onClick }) => {
 
 const styles = StyleSheet.create({
   pixel: {
-    width: 25,
-    height: 25,
+    width: 15,
+    height: 15,
     margin: 1,
     backgroundColor: sett.colors.white,
     alignItems: "center",

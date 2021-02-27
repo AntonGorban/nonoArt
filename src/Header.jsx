@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   text: {
-    fontSize: 35,
+    fontSize: 30,
     color: "#fefefe",
     fontFamily: "Fredericka-the-Great",
     textAlign: "center",
