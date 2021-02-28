@@ -4,7 +4,7 @@ import { Row } from "./Row";
 import { Counters } from "./Counters";
 import * as sett from "../settings.json";
 
-export const GameGrid = ({ art, data, colors, onClick }) => {
+export const GameGrid = ({ art, data, colors, onClick, selectedColor }) => {
   // console.log(Dimensions.get("screen"));
   const [size, setSize] = useState(0);
   const updateSize = (size) =>
@@ -45,6 +45,7 @@ export const GameGrid = ({ art, data, colors, onClick }) => {
                 colors={colors}
                 onClick={onClick}
                 key={rowIndex.toString()}
+                selectedColor={selectedColor}
               />
             ))}
           </View>

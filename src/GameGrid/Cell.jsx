@@ -2,9 +2,16 @@ import React from "react";
 import { View, StyleSheet, TouchableNativeFeedback } from "react-native";
 import * as sett from "../settings.json";
 
-export const Cell = ({ cell, rowIndex, cellIndex, color, onClick, size }) => {
-  const clickHandler = () =>
-    onClick(rowIndex, cellIndex, Math.trunc((Math.random() * 10) % 3));
+export const Cell = ({
+  cell,
+  rowIndex,
+  cellIndex,
+  color,
+  onClick,
+  size,
+  selectedColor,
+}) => {
+  const clickHandler = () => onClick(rowIndex, cellIndex, selectedColor);
 
   return (
     <TouchableNativeFeedback onPress={clickHandler}>

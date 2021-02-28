@@ -6,6 +6,7 @@ import * as sett from "./src/settings.json";
 import * as level from "./src/assets/level.json";
 import { Header } from "./src/Header";
 import { GameGrid } from "./src/GameGrid/GameGrid";
+import { Colors } from "./src/GameGrid/Colors";
 
 const arr = (height, width) =>
   Array(height)
@@ -13,22 +14,15 @@ const arr = (height, width) =>
     .map(() => Array(width).fill(null));
 
 export default function App() {
-  const [data, setData] = useState(arr(19, 15));
+  const [data, setData] = useState(arr(level.art.length, level.art[0].length));
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
-      prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
+      if (color !== null)
+        prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
       return [...prev];
     });
 
-  // setData((prev) =>
-  //   prev.map((row, rowIndex) =>
-  //     rowIndex == rowId
-  //       ? row.map((cell, cellIndex) =>
-  //           cellIndex == colId ? (cell != color ? color : null) : cell
-  //         )
-  //       : row
-  //   )
-  // );
+  const [selectedColor, setSelectedColor] = useState(null);
 
   /* --- Fonts --- */
   const [fontsLoaded] = Font.useFonts({
@@ -49,14 +43,17 @@ export default function App() {
         <Text>Levels</Text>
       </View>
       <GameGrid
-        art={data}
+        art={level.art}
         data={data}
         colors={level.colors}
         onClick={updateData}
+        selectedColor={selectedColor}
       />
-      <View style={{ height: 100 }}>
-        <Text>Colors</Text>
-      </View>
+      <Colors
+        colors={level.colors}
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
+      />
     </View>
   );
 }
