@@ -7,6 +7,7 @@ import * as level from "./src/assets/level.json";
 import { Header } from "./src/Header";
 import { GameGrid } from "./src/GameGrid/GameGrid";
 import { Colors } from "./src/GameGrid/Colors";
+import { LevelName } from "./src/GameGrid/LevelName";
 
 const arr = (height, width) =>
   Array(height)
@@ -39,9 +40,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header />
-      <View style={{ height: 90 }}>
-        <Text>Levels</Text>
-      </View>
+      <LevelName index="0" name="Сердечко" />
       <GameGrid
         art={level.art}
         data={data}
