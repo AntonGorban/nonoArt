@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, TouchableNativeFeedback, Text } from "react-native";
 import * as sett from "../settings.json";
+import Context from "../context";
 
-export const Counters = ({ mode, art, data, colors, size }) => {
+export const Counters = ({ mode, size }) => {
+  const { level, data } = useContext(Context);
   const counterElements = [];
-  for (let i = 0; i < (mode === "row" ? art.length : art[0].length); i++) {
+  for (
+    let i = 0;
+    i < (mode === "row" ? level.art.length : level.art[0].length);
+    i++
+  ) {
     let counterValue = [0, 0, 0];
-    for (let j = 0; j < (mode === "row" ? art[0].length : art.length); j++) {
-      art[mode === "row" ? i : j][mode === "row" ? j : i] !== null
-        ? counterValue[art[mode === "row" ? i : j][mode === "row" ? j : i]]++
+    for (
+      let j = 0;
+      j < (mode === "row" ? level.art[0].length : level.art.length);
+      j++
+    ) {
+      level.art[mode === "row" ? i : j][mode === "row" ? j : i] !== null
+        ? counterValue[
+            level.art[mode === "row" ? i : j][mode === "row" ? j : i]
+          ]++
         : undefined;
       data[mode === "row" ? i : j][mode === "row" ? j : i] !== null
         ? counterValue[data[mode === "row" ? i : j][mode === "row" ? j : i]]--
@@ -28,7 +40,7 @@ export const Counters = ({ mode, art, data, colors, size }) => {
         <Text
           style={{
             ...styles.text,
-            color: colors[0],
+            color: level.colors[0],
             fontSize: Math.round(size * 0.47),
           }}
         >
@@ -37,7 +49,7 @@ export const Counters = ({ mode, art, data, colors, size }) => {
         <Text
           style={{
             ...styles.text,
-            color: colors[1],
+            color: level.colors[1],
             fontSize: Math.round(size * 0.47),
           }}
         >
@@ -46,7 +58,7 @@ export const Counters = ({ mode, art, data, colors, size }) => {
         <Text
           style={{
             ...styles.text,
-            color: colors[2],
+            color: level.colors[2],
             fontSize: Math.round(size * 0.47),
           }}
         >

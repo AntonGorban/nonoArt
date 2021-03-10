@@ -1,34 +1,54 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
+import Context from "../context";
 import * as sett from "../settings.json";
 
-export const Colors = ({ colors, selectedColor, setSelectedColor }) => {
+export const Colors = () => {
+  const { level, selectedColor, setSelectedColor } = useContext(Context);
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setSelectedColor(0)}>
+      <TouchableOpacity
+        onPress={() => setSelectedColor(0)}
+        style={{
+          ...styles.colorContainer,
+          borderWidth: selectedColor === 0 ? 5 : 0,
+        }}
+      >
         <View
           style={{
             ...styles.color,
-            backgroundColor: colors[0],
-            borderWidth: selectedColor === 0 ? 4 : 0,
+            backgroundColor: level.colors[0],
+            borderWidth: selectedColor === 0 ? 3 : 0,
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSelectedColor(1)}>
+      <TouchableOpacity
+        onPress={() => setSelectedColor(1)}
+        style={{
+          ...styles.colorContainer,
+          borderWidth: selectedColor === 1 ? 5 : 0,
+        }}
+      >
         <View
           style={{
             ...styles.color,
-            backgroundColor: colors[1],
-            borderWidth: selectedColor === 1 ? 4 : 0,
+            backgroundColor: level.colors[1],
+            borderWidth: selectedColor === 1 ? 3 : 0,
           }}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSelectedColor(2)}>
+      <TouchableOpacity
+        onPress={() => setSelectedColor(2)}
+        style={{
+          ...styles.colorContainer,
+          borderWidth: selectedColor === 2 ? 5 : 0,
+        }}
+      >
         <View
           style={{
             ...styles.color,
-            backgroundColor: colors[2],
-            borderWidth: selectedColor === 2 ? 4 : 0,
+            backgroundColor: level.colors[2],
+            borderWidth: selectedColor === 2 ? 3 : 0,
           }}
         />
       </TouchableOpacity>
@@ -47,14 +67,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
   },
+  colorContainer: {
+    height: 90,
+    width: 90,
+    borderRadius: 45,
+    borderStyle: "solid",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: sett.colors.darkBlack,
+  },
   color: {
     height: 80,
     width: 80,
     borderRadius: 40,
     borderStyle: "solid",
-    borderTopColor: sett.colors.white,
-    borderBottomColor: sett.colors.white,
-    borderLeftColor: sett.colors.black,
-    borderRightColor: sett.colors.black,
+    borderColor: sett.colors.white,
   },
 });

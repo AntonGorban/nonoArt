@@ -4,6 +4,7 @@ import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import * as sett from "./src/settings.json";
 import * as level from "./src/assets/level.json";
+import Context from "./src/context";
 import { Header } from "./src/Header";
 import { GameGrid } from "./src/GameGrid/GameGrid";
 import { Colors } from "./src/GameGrid/Colors";
@@ -38,22 +39,16 @@ export default function App() {
   }
   /* --- End Fonts --- */
   return (
-    <View style={styles.container}>
-      <Header />
-      <LevelName index="0" name="Сердечко" />
-      <GameGrid
-        art={level.art}
-        data={data}
-        colors={level.colors}
-        onClick={updateData}
-        selectedColor={selectedColor}
-      />
-      <Colors
-        colors={level.colors}
-        selectedColor={selectedColor}
-        setSelectedColor={setSelectedColor}
-      />
-    </View>
+    <Context.Provider
+      value={{ level, data, selectedColor, setSelectedColor, updateData }}
+    >
+      <View style={styles.container}>
+        <Header />
+        <LevelName index="0" name={level.name} />
+        <GameGrid />
+        <Colors />
+      </View>
+    </Context.Provider>
   );
 }
 
