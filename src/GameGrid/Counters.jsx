@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, TouchableNativeFeedback, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import * as sett from "../settings.json";
 import Context from "../context";
 
 export const Counters = ({ mode, size }) => {
-  const { level, data } = useContext(Context);
+  const { level, data, clearLineData } = useContext(Context);
   const counterElements = [];
   for (
     let i = 0;
@@ -27,44 +27,49 @@ export const Counters = ({ mode, size }) => {
         : undefined;
     }
     counterElements.push(
-      <View
-        style={{
-          ...styles.counter,
-          flexDirection: mode,
-          height: mode === "row" ? size : size * 2,
-          width: mode === "row" ? size * 2 : size,
-          justifyContent: "space-evenly",
-        }}
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={clearLineData.bind(null, mode, i)}
         key={`counter-${mode}-${i}`}
       >
-        <Text
+        <View
           style={{
-            ...styles.text,
-            color: level.colors[0],
-            fontSize: Math.round(size * 0.47),
+            ...styles.counter,
+            flexDirection: mode,
+            height: mode === "row" ? size : size * 2,
+            width: mode === "row" ? size * 2 : size,
+            justifyContent: "space-evenly",
           }}
         >
-          {counterValue[0]}
-        </Text>
-        <Text
-          style={{
-            ...styles.text,
-            color: level.colors[1],
-            fontSize: Math.round(size * 0.47),
-          }}
-        >
-          {counterValue[1]}
-        </Text>
-        <Text
-          style={{
-            ...styles.text,
-            color: level.colors[2],
-            fontSize: Math.round(size * 0.47),
-          }}
-        >
-          {counterValue[2]}
-        </Text>
-      </View>
+          <Text
+            style={{
+              ...styles.text,
+              color: level.colors[0],
+              fontSize: Math.round(size * 0.47),
+            }}
+          >
+            {counterValue[0]}
+          </Text>
+          <Text
+            style={{
+              ...styles.text,
+              color: level.colors[1],
+              fontSize: Math.round(size * 0.47),
+            }}
+          >
+            {counterValue[1]}
+          </Text>
+          <Text
+            style={{
+              ...styles.text,
+              color: level.colors[2],
+              fontSize: Math.round(size * 0.47),
+            }}
+          >
+            {counterValue[2]}
+          </Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 

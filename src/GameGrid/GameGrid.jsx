@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Row } from "./Row";
 import { Counters } from "./Counters";
+import { ClearButton } from "./ClearButton";
 import * as sett from "../settings.json";
 
 export const GameGrid = () => {
@@ -21,7 +22,10 @@ export const GameGrid = () => {
       onLayout={(event) => updateSize(event.nativeEvent.layout)}
     >
       <View style={styles.container}>
-        <Counters mode="column" size={size} />
+        <View style={styles.rowContainer}>
+          <ClearButton size={size} />
+          <Counters mode="column" size={size} />
+        </View>
         <View style={styles.rowContainer}>
           <Counters mode="row" size={size} />
           <View>

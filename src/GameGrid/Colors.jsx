@@ -9,6 +9,7 @@ export const Colors = () => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => setSelectedColor(0)}
+        activeOpacity={0.7}
         style={{
           ...styles.colorContainer,
           borderWidth: selectedColor === 0 ? 5 : 0,
@@ -24,6 +25,7 @@ export const Colors = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => setSelectedColor(1)}
+        activeOpacity={0.7}
         style={{
           ...styles.colorContainer,
           borderWidth: selectedColor === 1 ? 5 : 0,
@@ -39,6 +41,7 @@ export const Colors = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => setSelectedColor(2)}
+        activeOpacity={0.7}
         style={{
           ...styles.colorContainer,
           borderWidth: selectedColor === 2 ? 5 : 0,

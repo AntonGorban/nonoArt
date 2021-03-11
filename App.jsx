@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import * as sett from "./src/settings.json";
@@ -23,6 +23,41 @@ export default function App() {
         prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
       return [...prev];
     });
+  const clearAllData = () =>
+    clearDataAlert(
+      "Очистка поля",
+      "Вы точно хотите очистить все поле?",
+      (prev) => arr(prev.length, prev[0].length)
+    );
+  const clearLineData = (mode, id) =>
+    clearDataAlert(
+      "Очистка поля",
+      `Вы точно хотите очистить ${mode === "row" ? "строку" : "колонку"} № ${
+        id + 1
+      }?`,
+      (prev) => {
+        mode === "row"
+          ? prev[id].fill(null)
+          : prev.forEach((line) => (line[id] = null));
+        return [...prev];
+      }
+    );
+
+  const clearDataAlert = (title, massage, func) =>
+    Alert.alert(
+      title,
+      massage,
+      [
+        {
+          text: "Нет, оставить",
+        },
+        {
+          text: "Да, очистить",
+          onPress: setData.bind(null, (prev) => func(prev)),
+        },
+      ],
+      { cancelable: true }
+    );
 
   const [selectedColor, setSelectedColor] = useState(null);
 
@@ -40,7 +75,15 @@ export default function App() {
   /* --- End Fonts --- */
   return (
     <Context.Provider
-      value={{ level, data, selectedColor, setSelectedColor, updateData }}
+      value={{
+        level,
+        data,
+        selectedColor,
+        setSelectedColor,
+        updateData,
+        clearAllData,
+        clearLineData,
+      }}
     >
       <View style={styles.container}>
         <Header />
