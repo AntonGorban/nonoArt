@@ -10,6 +10,7 @@ import * as level from "./src/assets/level.json";
 import Context from "./src/context";
 import { Main } from "./src/Screen/Main";
 import { Game } from "./src/Screen/Game";
+import { Designer } from "./src/Screen/Designer";
 import { Header } from "./src/Header";
 
 const Stack = createStackNavigator();
@@ -33,6 +34,11 @@ export default function App() {
         <Stack.Navigator initialRouteName="Main" headerMode="float">
           <Stack.Screen name="Main" component={Main} options={headerOptions} />
           <Stack.Screen name="Game" component={Game} options={headerOptions} />
+          <Stack.Screen
+            name="Designer"
+            component={Designer}
+            options={headerOptions}
+          />
         </Stack.Navigator>
         <StatusBar
           barStyle="light-content"

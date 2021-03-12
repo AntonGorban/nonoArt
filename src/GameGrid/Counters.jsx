@@ -4,7 +4,7 @@ import * as sett from "../settings.json";
 import Context from "../context";
 
 export const Counters = ({ mode, size }) => {
-  const { level, data, clearLineData } = useContext(Context);
+  const { level, data, clearLineData, designer } = useContext(Context);
   const counterElements = [];
   for (
     let i = 0;
@@ -22,9 +22,10 @@ export const Counters = ({ mode, size }) => {
             level.art[mode === "row" ? i : j][mode === "row" ? j : i]
           ]++
         : undefined;
-      data[mode === "row" ? i : j][mode === "row" ? j : i] !== null
-        ? counterValue[data[mode === "row" ? i : j][mode === "row" ? j : i]]--
-        : undefined;
+      if (!designer)
+        data[mode === "row" ? i : j][mode === "row" ? j : i] !== null
+          ? counterValue[data[mode === "row" ? i : j][mode === "row" ? j : i]]--
+          : undefined;
     }
     counterElements.push(
       <TouchableOpacity
