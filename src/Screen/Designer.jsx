@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import * as sett from "../settings.json";
 // import * as level from "../assets/level.json";
@@ -12,7 +12,7 @@ const arr = (height, width) =>
     .fill(null)
     .map(() => Array(width).fill(null));
 
-export const Designer = () => {
+export const Designer = (navigation) => {
   const [data, setData] = useState(arr(10, 10));
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
@@ -77,6 +77,8 @@ export const Designer = () => {
     });
   const [selectedColor, setSelectedColor] = useState(1);
 
+  const { setColorPickerProps } = useContext(Context);
+
   return (
     <Context.Provider
       value={{
@@ -89,12 +91,13 @@ export const Designer = () => {
         clearLineData,
         updateColors,
         designer: true,
+        navigation,
       }}
     >
       <View style={styles.container}>
         <LevelName index="0" name={level.name} />
         <GameGrid />
-        <Colors />
+        <Colors setColorPickerProps={setColorPickerProps} />
       </View>
     </Context.Provider>
   );
