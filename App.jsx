@@ -1,66 +1,20 @@
+import "react-native-gesture-handler";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Button, Alert, StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import * as sett from "./src/settings.json";
 import * as level from "./src/assets/level.json";
 import Context from "./src/context";
+import { Main } from "./src/Screen/Main";
+import { Game } from "./src/Screen/Game";
 import { Header } from "./src/Header";
-import { GameGrid } from "./src/GameGrid/GameGrid";
-import { Colors } from "./src/GameGrid/Colors";
-import { LevelName } from "./src/GameGrid/LevelName";
 
-const arr = (height, width) =>
-  Array(height)
-    .fill(null)
-    .map(() => Array(width).fill(null));
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [data, setData] = useState(arr(level.art.length, level.art[0].length));
-  const updateData = (rowId, colId, color) =>
-    setData((prev) => {
-      if (color !== null)
-        prev[rowId][colId] = prev[rowId][colId] != color ? color : null;
-      return [...prev];
-    });
-  const clearAllData = () =>
-    clearDataAlert(
-      "Очистка поля",
-      "Вы точно хотите очистить все поле?",
-      (prev) => arr(prev.length, prev[0].length)
-    );
-  const clearLineData = (mode, id) =>
-    clearDataAlert(
-      "Очистка поля",
-      `Вы точно хотите очистить ${mode === "row" ? "строку" : "колонку"} № ${
-        id + 1
-      }?`,
-      (prev) => {
-        mode === "row"
-          ? prev[id].fill(null)
-          : prev.forEach((line) => (line[id] = null));
-        return [...prev];
-      }
-    );
-
-  const clearDataAlert = (title, massage, func) =>
-    Alert.alert(
-      title,
-      massage,
-      [
-        {
-          text: "Нет, оставить",
-        },
-        {
-          text: "Да, очистить",
-          onPress: setData.bind(null, (prev) => func(prev)),
-        },
-      ],
-      { cancelable: true }
-    );
-
-  const [selectedColor, setSelectedColor] = useState(null);
-
   /* --- Fonts --- */
   const [fontsLoaded] = Font.useFonts({
     "Montserrat-Alternates-light": require("./src/assets/fonts/MontserratAlternates-Light.otf"),
@@ -74,26 +28,39 @@ export default function App() {
   }
   /* --- End Fonts --- */
   return (
-    <Context.Provider
-      value={{
-        level,
-        data,
-        selectedColor,
-        setSelectedColor,
-        updateData,
-        clearAllData,
-        clearLineData,
-      }}
-    >
-      <View style={styles.container}>
-        <Header />
-        <LevelName index="0" name={level.name} />
-        <GameGrid />
-        <Colors />
-      </View>
-    </Context.Provider>
+    <NavigationContainer>
+      <Context.Provider value={{ Stack }}>
+        <Stack.Navigator initialRouteName="Main" headerMode="float">
+          <Stack.Screen name="Main" component={Main} options={headerOptions} />
+          <Stack.Screen name="Game" component={Game} options={headerOptions} />
+        </Stack.Navigator>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={sett.colors.darkBlack}
+          translucent={false}
+        />
+      </Context.Provider>
+    </NavigationContainer>
   );
 }
+
+const headerOptions = {
+  title: "nonoArt",
+  headerStyle: {
+    backgroundColor: sett.colors.darkBlack,
+    borderColor: sett.colors.white,
+    borderStyle: "solid",
+    borderBottomWidth: 1,
+  },
+  headerTitleAlign: "center",
+  headerTintColor: sett.colors.white,
+  headerTitleStyle: {
+    fontSize: 30,
+    color: "#fefefe",
+    fontFamily: "Fredericka-the-Great",
+    textAlign: "center",
+  },
+};
 
 const styles = StyleSheet.create({
   container: {
