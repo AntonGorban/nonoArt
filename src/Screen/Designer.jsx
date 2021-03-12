@@ -66,6 +66,15 @@ export const Designer = () => {
     colors: ["#ff0000", "#00ff00", "#0000ff"],
     art: data,
   });
+
+  const updateColors = (colors) =>
+    setLevel({
+      name: level.name,
+      width: level.width,
+      height: level.height,
+      colors: colors,
+      art: level.art,
+    });
   const [selectedColor, setSelectedColor] = useState(1);
 
   return (
@@ -78,6 +87,7 @@ export const Designer = () => {
         updateData,
         clearAllData,
         clearLineData,
+        updateColors,
         designer: true,
       }}
     >

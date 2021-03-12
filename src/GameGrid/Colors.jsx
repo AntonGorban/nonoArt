@@ -1,10 +1,27 @@
-import React, { useContext } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, TouchableOpacity, StyleSheet, TextInput } from "react-native";
 import Context from "../context";
 import * as sett from "../settings.json";
 
 export const Colors = () => {
-  const { level, selectedColor, setSelectedColor } = useContext(Context);
+  const {
+    level,
+    selectedColor,
+    setSelectedColor,
+    updateColors,
+    designer,
+  } = useContext(Context);
+  const [colors, setColors] = useState(level.colors);
+  const updateColor = (id, hex) => {
+    setColors((prev) => {
+      prev[id] = `#${hex
+        .replace(/#/gi, "")
+        .replace(/[^0-9^a-f]/gi, "")
+        .toLowerCase()}`;
+      return [...prev];
+    });
+    if (colors[id].length === 7) updateColors(colors);
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -21,7 +38,19 @@ export const Colors = () => {
             backgroundColor: level.colors[0],
             borderWidth: selectedColor === 0 ? 3 : 0,
           }}
-        />
+        >
+          {designer ? (
+            <TextInput
+              style={styles.input}
+              value={colors[0]}
+              onChangeText={(text) => updateColor(0, text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              maxLength={7}
+            />
+          ) : null}
+        </View>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => setSelectedColor(1)}
@@ -37,7 +66,19 @@ export const Colors = () => {
             backgroundColor: level.colors[1],
             borderWidth: selectedColor === 1 ? 3 : 0,
           }}
-        />
+        >
+          {designer ? (
+            <TextInput
+              style={styles.input}
+              value={colors[1]}
+              onChangeText={(text) => updateColor(1, text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              maxLength={7}
+            />
+          ) : null}
+        </View>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => setSelectedColor(2)}
@@ -53,7 +94,19 @@ export const Colors = () => {
             backgroundColor: level.colors[2],
             borderWidth: selectedColor === 2 ? 3 : 0,
           }}
-        />
+        >
+          {designer ? (
+            <TextInput
+              style={styles.input}
+              value={colors[2]}
+              onChangeText={(text) => updateColor(2, text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              maxLength={7}
+            />
+          ) : null}
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -85,5 +138,15 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderStyle: "solid",
     borderColor: sett.colors.white,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  input: {
+    backgroundColor: sett.colors.white,
+    width: "100%",
+    textAlign: "center",
+    borderRadius: 15,
+    fontSize: 17,
+    marginBottom: -10,
   },
 });
