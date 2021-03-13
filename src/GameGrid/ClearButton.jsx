@@ -4,15 +4,20 @@ import Context from "../context";
 import * as sett from "../settings.json";
 
 export const ClearButton = ({ size }) => {
-  const { clearAllData } = useContext(Context);
+  const { clearAllData, level } = useContext(Context);
+  const getSize = (size) => {
+    let width = Math.floor(size.width / (level.width + 2));
+    let height = Math.floor(size.height / (level.height + 2));
+    return Math.min(width, height) - 2;
+  };
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={clearAllData.bind(null)}>
       <View
         style={{
           ...styles.container,
-          width: size * 2,
-          height: size * 2,
-          borderTopLeftRadius: size,
+          width: getSize(size) * 2,
+          height: getSize(size) * 2,
+          borderTopLeftRadius: getSize(size),
         }}
       >
         <Image

@@ -5,7 +5,7 @@ import * as sett from "../settings.json";
 import Context from "../context";
 import { GameGrid } from "../GameGrid/GameGrid";
 import { Colors } from "../GameGrid/Colors";
-import { LevelName } from "../GameGrid/LevelName";
+import { LevelSettings } from "../GameGrid/LevelSettings";
 
 const arr = (height, width) =>
   Array(height)
@@ -13,7 +13,7 @@ const arr = (height, width) =>
     .map(() => Array(width).fill(null));
 
 export const Designer = (navigation) => {
-  const [data, setData] = useState(arr(10, 10));
+  const [data, setData] = useState(arr(5, 5));
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
       if (color !== null)
@@ -42,6 +42,41 @@ export const Designer = (navigation) => {
         return [...prev];
       }
     );
+
+  const addLineData = (mode) => {
+    setData((prev) => {
+      mode === "row"
+        ? prev.push(Array(prev[0].length).fill(null))
+        : prev.forEach((line) => line.push(null));
+      return [...prev];
+    });
+    setLevel((prev) => {
+      return {
+        name: prev.name,
+        width: data[0].length,
+        height: data.length,
+        colors: prev.colors,
+        art: data,
+      };
+    });
+  };
+
+  const removeLineData = (mode) => {
+    setData((prev) => {
+      mode === "row" ? prev.pop() : prev.forEach((line) => line.pop());
+      console.log(prev);
+      return [...prev];
+    });
+    setLevel((prev) => {
+      return {
+        name: prev.name,
+        width: data[0].length,
+        height: data.length,
+        colors: prev.colors,
+        art: data,
+      };
+    });
+  };
 
   const clearDataAlert = (title, massage, func) =>
     Alert.alert(
@@ -75,7 +110,7 @@ export const Designer = (navigation) => {
       colors: colors,
       art: level.art,
     });
-  const [selectedColor, setSelectedColor] = useState(1);
+  const [selectedColor, setSelectedColor] = useState(null);
 
   const { setColorPickerProps } = useContext(Context);
 
@@ -92,10 +127,12 @@ export const Designer = (navigation) => {
         updateColors,
         designer: true,
         navigation,
+        addLineData,
+        removeLineData,
       }}
     >
       <View style={styles.container}>
-        <LevelName index="0" name={level.name} />
+        <LevelSettings index="0" name={level.name} />
         <GameGrid />
         <Colors setColorPickerProps={setColorPickerProps} />
       </View>

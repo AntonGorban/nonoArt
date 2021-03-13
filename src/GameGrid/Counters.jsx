@@ -5,6 +5,11 @@ import Context from "../context";
 
 export const Counters = ({ mode, size }) => {
   const { level, data, clearLineData, designer } = useContext(Context);
+  const getSize = (size) => {
+    let width = Math.floor(size.width / (level.width + 2));
+    let height = Math.floor(size.height / (level.height + 2));
+    return Math.min(width, height) - 2;
+  };
   const counterElements = [];
   for (
     let i = 0;
@@ -37,8 +42,8 @@ export const Counters = ({ mode, size }) => {
           style={{
             ...styles.counter,
             flexDirection: mode,
-            height: mode === "row" ? size : size * 2,
-            width: mode === "row" ? size * 2 : size,
+            height: mode === "row" ? getSize(size) : getSize(size) * 2,
+            width: mode === "row" ? getSize(size) * 2 : getSize(size),
             justifyContent: "space-evenly",
           }}
         >
@@ -46,7 +51,7 @@ export const Counters = ({ mode, size }) => {
             style={{
               ...styles.text,
               color: level.colors[0],
-              fontSize: Math.round(size * 0.47),
+              fontSize: Math.round(getSize(size) * 0.47),
             }}
           >
             {counterValue[0]}
@@ -55,7 +60,7 @@ export const Counters = ({ mode, size }) => {
             style={{
               ...styles.text,
               color: level.colors[1],
-              fontSize: Math.round(size * 0.47),
+              fontSize: Math.round(getSize(size) * 0.47),
             }}
           >
             {counterValue[1]}
@@ -64,7 +69,7 @@ export const Counters = ({ mode, size }) => {
             style={{
               ...styles.text,
               color: level.colors[2],
-              fontSize: Math.round(size * 0.47),
+              fontSize: Math.round(getSize(size) * 0.47),
             }}
           >
             {counterValue[2]}
