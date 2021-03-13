@@ -95,12 +95,21 @@ export const Designer = (navigation) => {
     );
 
   const [level, setLevel] = useState({
-    name: "Название",
+    name: "",
     width: data[0].length,
     height: data.length,
     colors: ["#ff0000", "#00ff00", "#0000ff"],
     art: data,
   });
+
+  const updateName = (text) =>
+    setLevel({
+      name: text,
+      width: level.width,
+      height: level.height,
+      colors: level.colors,
+      art: level.art,
+    });
 
   const updateColors = (colors) =>
     setLevel({
@@ -129,6 +138,7 @@ export const Designer = (navigation) => {
         navigation,
         addLineData,
         removeLineData,
+        updateName,
       }}
     >
       <View style={styles.container}>

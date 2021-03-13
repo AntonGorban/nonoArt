@@ -9,8 +9,10 @@ import {
 import Context from "../context";
 import * as sett from "../settings.json";
 
-export const LevelSettings = ({ index, name }) => {
-  const { level, addLineData, removeLineData, data } = useContext(Context);
+export const LevelSettings = () => {
+  const { level, addLineData, removeLineData, updateName } = useContext(
+    Context
+  );
   return (
     <View style={styles.container}>
       <View style={styles.countersContainer}>
@@ -49,7 +51,18 @@ export const LevelSettings = ({ index, name }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <Text>qweqweqeq</Text>
+      <View style={styles.nameContainer}>
+        <TextInput
+          value={level.name}
+          placeholder="Название уровня"
+          placeholderTextColor="#fefefe77"
+          onChangeText={(text) => updateName(text)}
+          style={styles.input}
+        />
+        <TouchableOpacity style={styles.copyButton}>
+          <Text style={styles.copyButtonText}>Получить</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -75,6 +88,7 @@ const styles = StyleSheet.create({
   counterText: {
     color: sett.colors.white,
     paddingHorizontal: 10,
+    fontFamily: "Montserrat-Alternates-regular",
   },
   button: {
     backgroundColor: sett.colors.white,
@@ -87,7 +101,34 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 17,
     color: sett.colors.darkBlack,
-    // height: 30,
     fontFamily: "Montserrat-Alternates-bold",
+  },
+  nameContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "100%",
+  },
+  input: {
+    color: sett.colors.white,
+    borderColor: sett.colors.white,
+    borderStyle: "solid",
+    borderBottomWidth: 1,
+    width: "60%",
+    height: 30,
+    fontSize: 17,
+    fontFamily: "Montserrat-Alternates-regular",
+  },
+  copyButton: {
+    backgroundColor: sett.colors.white,
+    color: sett.colors.darkBlack,
+    width: "30%",
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  copyButtonText: {
+    fontSize: 17,
+    fontFamily: "Montserrat-Alternates-regular",
   },
 });
