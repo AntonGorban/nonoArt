@@ -10,11 +10,16 @@ import * as level from "./src/assets/level.json";
 import Context from "./src/context";
 import { Main } from "./src/Screen/Main";
 import { Game } from "./src/Screen/Game";
+import { Designer } from "./src/Screen/Designer";
+import { ColorPicker } from "./src/GameGrid/ColorPicker";
+import { LevelJSON } from "./src/GameGrid/LevelJSON";
 import { Header } from "./src/Header";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [colorPickerProps, setColorPickerProps] = useState({});
+  const [levelJSONText, setLevelJSONText] = useState("");
   /* --- Fonts --- */
   const [fontsLoaded] = Font.useFonts({
     "Montserrat-Alternates-light": require("./src/assets/fonts/MontserratAlternates-Light.otf"),
@@ -29,10 +34,33 @@ export default function App() {
   /* --- End Fonts --- */
   return (
     <NavigationContainer>
-      <Context.Provider value={{ Stack }}>
+      <Context.Provider
+        value={{
+          Stack,
+          colorPickerProps,
+          setColorPickerProps,
+          levelJSONText,
+          setLevelJSONText,
+        }}
+      >
         <Stack.Navigator initialRouteName="Main" headerMode="float">
           <Stack.Screen name="Main" component={Main} options={headerOptions} />
           <Stack.Screen name="Game" component={Game} options={headerOptions} />
+          <Stack.Screen
+            name="Designer"
+            component={Designer}
+            options={headerOptions}
+          />
+          <Stack.Screen
+            name="ColorPicker"
+            component={ColorPicker}
+            options={headerOptions}
+          />
+          <Stack.Screen
+            name="LevelJSON"
+            component={LevelJSON}
+            options={headerOptions}
+          />
         </Stack.Navigator>
         <StatusBar
           barStyle="light-content"

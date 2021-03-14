@@ -5,6 +5,11 @@ import Context from "../context";
 
 export const Cell = ({ cell, rowIndex, cellIndex, size }) => {
   const { level, updateData, selectedColor } = useContext(Context);
+  const getSize = (size) => {
+    let width = Math.floor(size.width / (level.width + 2));
+    let height = Math.floor(size.height / (level.height + 2));
+    return Math.min(width, height) - 2;
+  };
   return (
     <TouchableNativeFeedback
       onPress={updateData.bind(null, rowIndex, cellIndex, selectedColor)}
@@ -21,8 +26,8 @@ export const Cell = ({ cell, rowIndex, cellIndex, size }) => {
           backgroundColor: level.colors[cell]
             ? level.colors[cell]
             : sett.colors.white,
-          width: size,
-          height: size,
+          width: getSize(size),
+          height: getSize(size),
         }}
       />
     </TouchableNativeFeedback>

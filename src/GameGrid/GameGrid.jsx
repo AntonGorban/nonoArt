@@ -7,19 +7,17 @@ import * as sett from "../settings.json";
 
 export const GameGrid = () => {
   const { level, data } = useContext(Context);
-  // console.log(Dimensions.get("screen"));
-  const [size, setSize] = useState(0);
-  const updateSize = (size) =>
-    setSize((prev) => {
-      let width = Math.floor(size.width / (level.art[0].length + 2));
-      let height = Math.floor(size.height / (level.art.length + 2));
-      return Math.min(width, height) - 2;
-    });
+  const [size, setSize] = useState({ height: 20, width: 20 });
 
   return (
     <View
       style={styles.gameGrid}
-      onLayout={(event) => updateSize(event.nativeEvent.layout)}
+      onLayout={(event) =>
+        setSize({
+          height: event.nativeEvent.layout.height,
+          width: event.nativeEvent.layout.width,
+        })
+      }
     >
       <View style={styles.container}>
         <View style={styles.rowContainer}>

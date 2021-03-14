@@ -17,7 +17,11 @@ export const Main = ({ navigation }) => {
       >
         <Text style={styles.buttonText}>Продолжить</Text>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.7} style={styles.buttonContainer}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.buttonContainer}
+        onPress={() => navigation.navigate("Designer")}
+      >
         <Text style={styles.buttonText}>Рисовать</Text>
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.7} style={styles.buttonContainer}>
