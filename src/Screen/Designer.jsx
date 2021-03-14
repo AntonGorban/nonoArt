@@ -64,7 +64,6 @@ export const Designer = (navigation) => {
   const removeLineData = (mode) => {
     setData((prev) => {
       mode === "row" ? prev.pop() : prev.forEach((line) => line.pop());
-      console.log(prev);
       return [...prev];
     });
     setLevel((prev) => {
@@ -121,7 +120,7 @@ export const Designer = (navigation) => {
     });
   const [selectedColor, setSelectedColor] = useState(null);
 
-  const { setColorPickerProps } = useContext(Context);
+  const { setColorPickerProps, setLevelJSONText } = useContext(Context);
 
   return (
     <Context.Provider
@@ -142,7 +141,7 @@ export const Designer = (navigation) => {
       }}
     >
       <View style={styles.container}>
-        <LevelSettings index="0" name={level.name} />
+        <LevelSettings setLevelJSONText={setLevelJSONText} />
         <GameGrid />
         <Colors setColorPickerProps={setColorPickerProps} />
       </View>

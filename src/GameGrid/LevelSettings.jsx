@@ -9,10 +9,14 @@ import {
 import Context from "../context";
 import * as sett from "../settings.json";
 
-export const LevelSettings = () => {
-  const { level, addLineData, removeLineData, updateName } = useContext(
-    Context
-  );
+export const LevelSettings = (setLevelJSONText) => {
+  const {
+    level,
+    addLineData,
+    removeLineData,
+    updateName,
+    navigation,
+  } = useContext(Context);
   return (
     <View style={styles.container}>
       <View style={styles.countersContainer}>
@@ -59,7 +63,13 @@ export const LevelSettings = () => {
           onChangeText={(text) => updateName(text)}
           style={styles.input}
         />
-        <TouchableOpacity style={styles.copyButton}>
+        <TouchableOpacity
+          style={styles.copyButton}
+          onPress={() => {
+            setLevelJSONText.setLevelJSONText(JSON.stringify(level));
+            navigation.navigation.navigate("LevelJSON");
+          }}
+        >
           <Text style={styles.copyButtonText}>Получить</Text>
         </TouchableOpacity>
       </View>
