@@ -25,118 +25,122 @@ export const Colors = ({ setColorPickerProps }) => {
   };
 
   return (
-    <Context.Provider value={{ qwe: "asd" }}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => setSelectedColor(0)}
-          onLongPress={() => {
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => setSelectedColor(0)}
+        onLongPress={() => {
+          if (designer) {
             setColorPickerProps({
               defaultColor: colors[0],
               id: 0,
               updateColor,
             });
             navigation.navigation.navigate("ColorPicker");
-          }}
-          activeOpacity={0.7}
+          }
+        }}
+        activeOpacity={0.7}
+        style={{
+          ...styles.colorContainer,
+          borderWidth: selectedColor === 0 ? 5 : 0,
+        }}
+      >
+        <View
           style={{
-            ...styles.colorContainer,
-            borderWidth: selectedColor === 0 ? 5 : 0,
+            ...styles.color,
+            backgroundColor: level.colors[0],
+            borderWidth: selectedColor === 0 ? 3 : 0,
           }}
         >
-          <View
-            style={{
-              ...styles.color,
-              backgroundColor: level.colors[0],
-              borderWidth: selectedColor === 0 ? 3 : 0,
-            }}
-          >
-            {designer ? (
-              <TextInput
-                style={styles.input}
-                value={colors[0]}
-                onChangeText={(text) => updateColor(0, text)}
-                autoCapitalize="none"
-                autoCorrect={false}
-                disableFullscreenUI={true}
-                maxLength={7}
-              />
-            ) : null}
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setSelectedColor(1)}
-          onLongPress={() => {
+          {designer ? (
+            <TextInput
+              style={styles.input}
+              value={colors[0]}
+              onChangeText={(text) => updateColor(0, text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              maxLength={7}
+            />
+          ) : null}
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => setSelectedColor(1)}
+        onLongPress={() => {
+          if (designer) {
             setColorPickerProps({
               defaultColor: colors[1],
               id: 1,
               updateColor,
             });
             navigation.navigation.navigate("ColorPicker");
-          }}
-          activeOpacity={0.7}
+          }
+        }}
+        activeOpacity={0.7}
+        style={{
+          ...styles.colorContainer,
+          borderWidth: selectedColor === 1 ? 5 : 0,
+        }}
+      >
+        <View
           style={{
-            ...styles.colorContainer,
-            borderWidth: selectedColor === 1 ? 5 : 0,
+            ...styles.color,
+            backgroundColor: level.colors[1],
+            borderWidth: selectedColor === 1 ? 3 : 0,
           }}
         >
-          <View
-            style={{
-              ...styles.color,
-              backgroundColor: level.colors[1],
-              borderWidth: selectedColor === 1 ? 3 : 0,
-            }}
-          >
-            {designer ? (
-              <TextInput
-                style={styles.input}
-                value={colors[1]}
-                onChangeText={(text) => updateColor(1, text)}
-                autoCapitalize="none"
-                autoCorrect={false}
-                disableFullscreenUI={true}
-                maxLength={7}
-              />
-            ) : null}
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setSelectedColor(2)}
-          onLongPress={() => {
+          {designer ? (
+            <TextInput
+              style={styles.input}
+              value={colors[1]}
+              onChangeText={(text) => updateColor(1, text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              maxLength={7}
+            />
+          ) : null}
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => setSelectedColor(2)}
+        onLongPress={() => {
+          if (designer) {
             setColorPickerProps({
               defaultColor: colors[2],
               id: 2,
               updateColor,
             });
             navigation.navigation.navigate("ColorPicker");
-          }}
-          activeOpacity={0.7}
+          }
+        }}
+        activeOpacity={0.7}
+        style={{
+          ...styles.colorContainer,
+          borderWidth: selectedColor === 2 ? 5 : 0,
+        }}
+      >
+        <View
           style={{
-            ...styles.colorContainer,
-            borderWidth: selectedColor === 2 ? 5 : 0,
+            ...styles.color,
+            backgroundColor: level.colors[2],
+            borderWidth: selectedColor === 2 ? 3 : 0,
           }}
         >
-          <View
-            style={{
-              ...styles.color,
-              backgroundColor: level.colors[2],
-              borderWidth: selectedColor === 2 ? 3 : 0,
-            }}
-          >
-            {designer ? (
-              <TextInput
-                style={styles.input}
-                value={colors[2]}
-                onChangeText={(text) => updateColor(2, text)}
-                autoCapitalize="none"
-                autoCorrect={false}
-                disableFullscreenUI={true}
-                maxLength={7}
-              />
-            ) : null}
-          </View>
-        </TouchableOpacity>
-      </View>
-    </Context.Provider>
+          {designer ? (
+            <TextInput
+              style={styles.input}
+              value={colors[2]}
+              onChangeText={(text) => updateColor(2, text)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              disableFullscreenUI={true}
+              maxLength={7}
+            />
+          ) : null}
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
