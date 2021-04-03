@@ -12,10 +12,20 @@ const arr = (height, width) =>
     .map(() => Array(width).fill(null));
 
 export const Game = () => {
-  const { levels, selectedLevel } = useContext(Context);
+  const { levels, selectedLevel, progress, updateProgress } = useContext(
+    Context
+  );
   let level = levels[selectedLevel];
 
-  const [data, setData] = useState(arr(level.art.length, level.art[0].length));
+  const [data, setLocalData] = useState(
+    progress !== undefined
+      ? progress
+      : arr(level.art.length, level.art[0].length)
+  );
+  const setData = (newData) => {
+    setLocalData(newData);
+    updateProgress(data);
+  };
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
       if (color !== null)

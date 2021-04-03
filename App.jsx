@@ -31,6 +31,7 @@ export default function App() {
     } else {
       if (data.length !== levels.length) setLevels(data);
     }
+    setProgress(data[selectedLevel].progress);
   });
 
   const [selectedLevel, setSelectedLevel] = useState(0);
@@ -58,6 +59,13 @@ export default function App() {
     });
   });
 
+  const [progress, setProgress] = useState(undefined);
+  const updateProgress = (data) => {
+    setProgress(data);
+    levels[selectedLevel].progress = data;
+    updateLevels(levels);
+  };
+
   const [colorPickerProps, setColorPickerProps] = useState({});
   const [levelJSONText, setLevelJSONText] = useState("");
   /* --- Fonts --- */
@@ -83,6 +91,8 @@ export default function App() {
           setLevelJSONText,
           levels,
           selectedLevel,
+          progress,
+          updateProgress,
         }}
       >
         <Stack.Navigator initialRouteName="Main" headerMode="float">
