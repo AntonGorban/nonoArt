@@ -33,6 +33,20 @@ export default function App() {
     }
   });
 
+  const [selectedLevel, setSelectedLevel] = useState(0);
+  const updateSelectedLevel = (selectedLevel) => {
+    storage.setObj("selectedLevel", selectedLevel);
+    setSelectedLevel(selectedLevel);
+  };
+
+  storage.getObj("selectedLevel").then((data) => {
+    if (data === null) {
+      updateSelectedLevel(0);
+    } else {
+      if (data !== selectedLevel) setSelectedLevel(data);
+    }
+  });
+
   getLevelsFromRepo().then((repoLevels) => {
     storage.getObj("levels").then((localLevels) => {
       if (repoLevels.length > localLevels.length) {
@@ -67,6 +81,8 @@ export default function App() {
           setColorPickerProps,
           levelJSONText,
           setLevelJSONText,
+          levels,
+          selectedLevel,
         }}
       >
         <Stack.Navigator initialRouteName="Main" headerMode="float">
