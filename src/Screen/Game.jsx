@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import * as sett from "../settings.json";
-import * as level from "../assets/level.json";
 import Context from "../context";
 import { GameGrid } from "../GameGrid/GameGrid";
 import { Colors } from "../GameGrid/Colors";
@@ -13,7 +12,20 @@ const arr = (height, width) =>
     .map(() => Array(width).fill(null));
 
 export const Game = () => {
-  const [data, setData] = useState(arr(level.art.length, level.art[0].length));
+  const { levels, selectedLevel, progress, updateProgress } = useContext(
+    Context
+  );
+  let level = levels[selectedLevel];
+
+  const [data, setLocalData] = useState(
+    progress !== undefined
+      ? progress
+      : arr(level.art.length, level.art[0].length)
+  );
+  const setData = (newData) => {
+    setLocalData(newData);
+    updateProgress(data);
+  };
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
       if (color !== null)
@@ -72,7 +84,7 @@ export const Game = () => {
       }}
     >
       <View style={styles.container}>
-        <LevelName index="0" name={level.name} />
+        <LevelName index={selectedLevel + 1} name={level.name} />
         <GameGrid />
         <Colors />
       </View>
