@@ -14,22 +14,34 @@ import { Designer } from "./src/Screen/Designer";
 import { ColorPicker } from "./src/GameGrid/ColorPicker";
 import { LevelJSON } from "./src/GameGrid/LevelJSON";
 import { Header } from "./src/Header";
-import storage from "./src/storage";
+import storage, { getLevelsFromRepo } from "./src/storage";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [levels, setLevels] = useState([]);
+  const updateLevels = (levels) => {
+    storage.setObj("levels", levels);
+    setLevels(levels);
+  };
 
   storage.getObj("levels").then((data) => {
     if (data === null) {
-      storage.setObj("levels", [localLevelJSON]);
-      setLevels([localLevelJSON]);
-      console.log("storage levels empty");
+      updateLevels([localLevelJSON]);
     } else {
-      if (data === levels) setLevels(data);
-      console.log("storage levels full");
+      if (data.length !== levels.length) setLevels(data);
     }
+  });
+
+  getLevelsFromRepo().then((repoLevels) => {
+    storage.getObj("levels").then((localLevels) => {
+      if (repoLevels.length > localLevels.length) {
+        for (let i = localLevels.length; i < repoLevels.length; i++) {
+          localLevels.push(repoLevels[i]);
+        }
+        updateLevels(localLevels);
+      }
+    });
   });
 
   const [colorPickerProps, setColorPickerProps] = useState({});
