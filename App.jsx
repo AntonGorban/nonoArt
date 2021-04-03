@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import * as sett from "./src/settings.json";
-import * as level from "./src/assets/level.json";
+import * as localLevelJSON from "./src/assets/level.json";
 import Context from "./src/context";
 import { Main } from "./src/Screen/Main";
 import { Game } from "./src/Screen/Game";
@@ -14,10 +14,24 @@ import { Designer } from "./src/Screen/Designer";
 import { ColorPicker } from "./src/GameGrid/ColorPicker";
 import { LevelJSON } from "./src/GameGrid/LevelJSON";
 import { Header } from "./src/Header";
+import storage from "./src/storage";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [levels, setLevels] = useState([]);
+
+  storage.getObj("levels").then((data) => {
+    if (data === null) {
+      storage.setObj("levels", [localLevelJSON]);
+      setLevels([localLevelJSON]);
+      console.log("storage levels empty");
+    } else {
+      if (data === levels) setLevels(data);
+      console.log("storage levels full");
+    }
+  });
+
   const [colorPickerProps, setColorPickerProps] = useState({});
   const [levelJSONText, setLevelJSONText] = useState("");
   /* --- Fonts --- */
