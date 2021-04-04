@@ -7,7 +7,11 @@ export const Main = ({ navigation }) => {
   // const { Stack } = useContext(Context);
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.7} style={styles.buttonContainer}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.buttonContainer}
+        onPress={() => navigation.navigate("Levels")}
+      >
         <Text style={styles.buttonText}>Уровни</Text>
       </TouchableOpacity>
       <TouchableOpacity
