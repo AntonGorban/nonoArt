@@ -1,5 +1,4 @@
-[
-	{
+[{
 		"name": "Сердечко",
 		"width": 10,
 		"height": 10,
@@ -41,6 +40,68 @@
 			[null, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, null],
 			[null, null, 1, 0, 0, 1, 1, 0, 0, 1, null, null],
 			[null, null, null, 1, 1, null, null, 1, 1, null, null, null]
+		]
+	},
+	{
+		"name": "Кошара",
+		"width": 10,
+		"height": 10,
+		"colors": ["#a1887f", "#1b1b1b", "#ff9777"],
+		"art": [
+			[0, 0, 0, null, null, null, null, 0, 0, 0],
+			[0, 2, 2, 0, 0, 0, 0, 2, 2, 0],
+			[0, null, null, null, null, null, null, null, null, 0],
+			[0, null, 0, 1, null, null, 1, 0, null, 0],
+			[0, null, 0, 0, null, null, 0, 0, null, 0],
+			[0, 0, null, null, 1, 1, null, null, 0, 0],
+			[0, 2, null, null, null, null, null, null, 2, 0],
+			[0, 2, 2, null, 1, 1, null, 2, 2, 0],
+			[null, 0, 0, null, null, null, null, 0, 0, null],
+			[null, null, null, 0, 0, 0, 0, null, null, null]
+		]
+	},
+	{
+		"name": "Помидорчик",
+		"width": 16,
+		"height": 16,
+		"colors": ["#1b1b1b", "#dd2c00", "#2c9846"],
+		"art": [
+			[null, null, null, null, null, null, null, 0, 0, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, 0, 2, 2, 0, null, null, null, null, null, null],
+			[null, null, null, null, 0, 0, 2, 2, 2, 2, 0, 0, null, null, null, null],
+			[null, null, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, null, null],
+			[null, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, null],
+			[null, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, null],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+			[0, 1, 1, null, 0, 1, 1, 1, 1, 1, 1, 0, null, 1, 1, 0],
+			[0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+			[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+			[null, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, null],
+			[null, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, null],
+			[null, null, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, null, null],
+			[null, null, null, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, null, null, null],
+			[null, null, null, null, null, 0, 0, 0, 0, 0, 0, null, null, null, null, null]
+		]
+	},
+	{
+		"name": "Pokeball",
+		"width": 12,
+		"height": 12,
+		"colors": ["#ff1111", "#111111", "#cfcfcf"],
+		"art": [
+			[null, null, null, null, 1, 1, 1, 1, null, null, null, null],
+			[null, null, 1, 1, 0, 0, 0, 0, 1, 1, null, null],
+			[null, 1, 0, 0, null, 0, 0, 0, 0, 0, 1, null],
+			[null, 1, 0, null, null, null, 0, 0, 0, 0, 1, null],
+			[1, 0, 0, 0, null, 0, 0, 0, 0, 0, 0, 1],
+			[1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+			[1, 1, 0, 0, 1, 2, 2, 1, 0, 0, 1, 1],
+			[1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1],
+			[null, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, null],
+			[null, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, null],
+			[null, null, 1, 1, 2, 2, 2, 2, 1, 1, null, null],
+			[null, null, null, null, 1, 1, 1, 1, null, null, null, null]
 		]
 	}
 ]
