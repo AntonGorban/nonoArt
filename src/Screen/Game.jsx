@@ -16,15 +16,34 @@ export const Game = () => {
     Context
   );
   let level = levels[selectedLevel];
-
+  const final = () => {
+    let result = true;
+    level.art.forEach((line, lineId) => {
+      line.forEach((cell, cellId) => {
+        if (cell !== data[lineId][cellId]) result = false;
+      });
+    });
+    if (result)
+      Alert.alert(
+        "Победа",
+        `Поздравляем вы успешно прошли уровень № ${selectedLevel} "${level.name}"`,
+        [
+          {
+            text: "OK",
+          },
+        ],
+        { cancelable: true }
+      );
+  };
   const [data, setLocalData] = useState(
     progress !== undefined
       ? progress
       : arr(level.art.length, level.art[0].length)
   );
-  const setData = (newData) => {
-    setLocalData(newData);
-    updateProgress(data);
+  const setData = async (newData) => {
+    await setLocalData(newData);
+    await updateProgress(data);
+    final();
   };
   const updateData = (rowId, colId, color) =>
     setData((prev) => {
