@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "nonoArt",
+    "slug": "nonoArt",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "sdkVersion": "40.0.0",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#2d2d2d"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.antogor.nonoArt",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.antogor.nonoArt",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/icon.png",
+        "backgroundColor": "#2d2d2d"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/icon.png"
+    }
+  }
+}
