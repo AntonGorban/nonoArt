@@ -14,7 +14,7 @@ import { Game } from "./src/Screen/Game";
 import { Designer } from "./src/Screen/Designer";
 import { ColorPicker } from "./src/GameGrid/ColorPicker";
 import { LevelJSON } from "./src/GameGrid/LevelJSON";
-import { Header } from "./src/Header";
+import { About } from "./src/Screen/About";
 import storage, { getLevelsFromRepo } from "./src/storage";
 
 const Stack = createStackNavigator();
@@ -114,6 +114,11 @@ export default function App() {
           <Stack.Screen
             name="ColorPicker"
             component={ColorPicker}
+            options={headerOptions}
+          />
+          <Stack.Screen
+            name="About"
+            component={About}
             options={headerOptions}
           />
           <Stack.Screen
